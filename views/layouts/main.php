@@ -26,55 +26,45 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+<div class="head">
+    <center>
+        <?= Html::a(Html::img(['/logo.png']),['site/index'] ) ?>
+    </center>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+    <?= $content ?>
+<!-- Navbar (sticky bottom) -->
+<div class="w3-bottom w3-small">
+    <div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-off">
+        <?= Html::a( 'ABOUT', 
+            ['site/about'],
+            [
+                'style'=>'width:25%;text-decoration: none;',
+                'class' => 'w3-bar-item w3-button w3-hover'
+            ]) 
+        ?>
+        <?= Html::a( 'CRICKET CENTER', 
+            ['site/cricket-center'],
+            [
+                'style'=>'width:25%;text-decoration: none;',
+                'class' => 'w3-bar-item w3-button w3-hover'
+            ]) 
+        ?>
+        <?= Html::a( 'EVENTS', 
+            ['site/event'],
+            [
+                'style'=>'width:25%;text-decoration: none;',
+                'class' => 'w3-bar-item w3-button w3-hover'
+            ]) 
+        ?>
+        <?= Html::a( 'BOOKING', 
+            ['site/booking'],
+            [
+                'style'=>'width:25%;text-decoration: none;',
+                'class' => 'w3-bar-item w3-button w3-hover'
+            ]) 
+        ?>
     </div>
-</footer>
-
+</div> 
 <?php $this->endBody() ?>
 </body>
 </html>

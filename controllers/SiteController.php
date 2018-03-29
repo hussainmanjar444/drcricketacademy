@@ -125,4 +125,16 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionCricketCenter()
+    {
+        return $this->render('cricket-center');
+    }
+    public function actionBooking()
+    {
+        return $this->render('booking');
+    }
+    public function actionEvent()
+    {
+        return $this->render('event');
+    }
 }

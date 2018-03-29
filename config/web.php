@@ -1,4 +1,7 @@
 <?php
+use yii\web\Request;
+$baseUrl = str_replace('/web', '', (new Request)->getBaseUrl());
+
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -12,7 +15,19 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js' => [YII_DEBUG ? 'js/jquery.min.js' : 'js/jquery.min.js'],
+                    'jsOptions' => ['type' => 'text/javascript'],
+                ],
+            ],
+        ],
         'request' => [
+            'baseUrl' => $baseUrl,
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'kjefhkaur348953uhdg98344td',
         ],
@@ -43,14 +58,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
+            'baseUrl' => $baseUrl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
